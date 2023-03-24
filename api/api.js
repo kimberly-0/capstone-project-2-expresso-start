@@ -14,4 +14,4 @@ const menusRouter = require('./menus');
 apiRouter.use('/menus', menusRouter);
 
 const menuitemsRouter = require('./menuitems');
-menusRouter.use('/:menuId/menuitems', menuitemsRouter);
+menusRouter.use('/:menuId/menu-items', menuitemsRouter);

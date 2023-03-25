@@ -41,11 +41,11 @@ const validateTimesheet = (req, res, next) => {
 };
 
 timesheetsRouter.post('/', validateTimesheet, (req, res, next) => {
-    const toCreateTimesheet = req.body.timesheet;
+    const newTimesheet = req.body.timesheet;
     db.run('INSERT INTO Timesheet (hours, rate, date, employee_id) VALUES ($hours, $rate, $date, $employeeId)', {
-        $hours: toCreateTimesheet.hours,
-        $rate: toCreateTimesheet.rate,
-        $date: toCreateTimesheet.date,
+        $hours: newTimesheet.hours,
+        $rate: newTimesheet.rate,
+        $date: newTimesheet.date,
         $employeeId: req.employee.id
     }, function(err) {
         if (err) {
@@ -66,7 +66,7 @@ timesheetsRouter.post('/', validateTimesheet, (req, res, next) => {
 
 timesheetsRouter.put('/:timesheetId', validateTimesheet, (req, res, next) => {
     const newTimesheet = req.body.timesheet;    
-    db.run('UPDATE timesheet SET hours = $hours, hours = $hours, rate = $rate, date = $date, employee_id = $employeeId WHERE id = $id', {
+    db.run('UPDATE timesheet SET hours = $hours, rate = $rate, date = $date, employee_id = $employeeId WHERE id = $id', {
         $id: req.timesheet.id,
         $hours: newTimesheet.hours,
         $rate: newTimesheet.rate,
